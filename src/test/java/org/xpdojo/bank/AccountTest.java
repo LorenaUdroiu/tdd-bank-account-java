@@ -167,4 +167,19 @@ public class AccountTest {
             assertThat(account2.balance()).isEqualTo(30);
         }
     }
+
+    @Test
+    public void printBalanceSlip() {
+        Account account = new Account();
+        account.deposit(10);
+        account.deposit(20);
+        assertThat(account.balance()).isEqualTo(30);
+
+        BalanceSlip balanceSlip = account.printBalanceSlip();
+
+        assertThat(balanceSlip).isNotNull();
+        assertThat(balanceSlip.getDate()).isNotNull();
+        assertThat(balanceSlip.getTime()).isNotNull();
+        assertThat(balanceSlip.getBalance()).isNotNull();
+    }
 }

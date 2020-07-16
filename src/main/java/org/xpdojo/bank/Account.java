@@ -1,5 +1,9 @@
 package org.xpdojo.bank;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class Account {
     private int balance = 0;
 
@@ -37,5 +41,18 @@ public class Account {
 
         this.withdraw(amount);
         account.deposit(amount);
+    }
+
+    public BalanceSlip printBalanceSlip(){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDate localDate = localDateTime.toLocalDate();
+        LocalTime localTime = localDateTime.toLocalTime();
+
+        BalanceSlip balanceSlip = new BalanceSlip();
+        balanceSlip.setDate(localDate.toString());
+        balanceSlip.setTime(localTime.toString());
+        balanceSlip.setBalance(balance());
+
+        return balanceSlip;
     }
 }
