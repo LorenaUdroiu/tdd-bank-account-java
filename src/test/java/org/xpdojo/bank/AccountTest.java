@@ -181,5 +181,7 @@ public class AccountTest {
         assertThat(balanceSlip.getDate()).isNotNull();
         assertThat(balanceSlip.getTime()).isNotNull();
         assertThat(balanceSlip.getBalance()).isNotNull();
+
+        assertThat(balanceSlip.getBalance()).isEqualTo(30);
     }
 }
