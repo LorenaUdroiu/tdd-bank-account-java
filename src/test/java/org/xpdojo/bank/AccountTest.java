@@ -80,4 +80,67 @@ public class AccountTest {
         }
         assertThat(exception).isTrue();
     }
+
+    @Test
+    public void withdrawBeyondBalance() {
+        Account account = new Account();
+        account.deposit(10);
+        account.deposit(20);
+        assertThat(account.balance()).isEqualTo(30);
+
+        boolean exception = false;
+        try {
+            //should this be considered to be an withdraw??
+            //instead of having an extra method for withdraw amount?
+            account.withdraw(35);
+        } catch (Exception ex) {
+            exception = true;
+        } finally {
+            //check the balance is the same
+            assertThat(account.balance()).isEqualTo(30);
+        }
+        assertThat(exception).isTrue();
+    }
+
+    @Test
+    public void transferAmountBetweenTwoAccounts() {
+        Account account1 = new Account();
+        account1.deposit(10);
+        account1.deposit(20);
+        assertThat(account1.balance()).isEqualTo(30);
+
+        Account account2 = new Account();
+        account2.deposit(10);
+        account2.deposit(20);
+        assertThat(account2.balance()).isEqualTo(30);
+
+        account1.transfer(account2, 5);
+
+        assertThat(account1.balance()).isEqualTo(25);
+        assertThat(account2.balance()).isEqualTo(35);
+    }
+
+    @Test
+    public void transferNegativeAmountBetweenTwoAccounts() {
+        Account account1 = new Account();
+        account1.deposit(10);
+        account1.deposit(20);
+        assertThat(account1.balance()).isEqualTo(30);
+
+        Account account2 = new Account();
+        account2.deposit(10);
+        account2.deposit(20);
+        assertThat(account2.balance()).isEqualTo(30);
+
+        boolean exception = false;
+        try {
+            account1.transfer(account2, -5);
+        } catch (Exception ex) {
+            exception = true;
+        } finally {
+            //check the balance is the same
+            assertThat(account1.balance()).isEqualTo(30);
+            assertThat(account2.balance()).isEqualTo(30);
+        }
+    }
 }

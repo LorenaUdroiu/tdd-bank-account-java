@@ -18,6 +18,24 @@ public class Account {
         if (amount < 0) {
             throw new IllegalArgumentException("Amount must be > 0");
         }
+
+        if (this.balance() < amount) {
+            throw new RuntimeException("Not enough money in your account!");
+        }
+
         balance -= amount;
+    }
+
+    public void transfer(Account account, int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Amount must be > 0");
+        }
+
+        if (this.balance() < amount) {
+            throw new RuntimeException("Not enough money in your account!");
+        }
+
+        this.withdraw(amount);
+        account.deposit(amount);
     }
 }
