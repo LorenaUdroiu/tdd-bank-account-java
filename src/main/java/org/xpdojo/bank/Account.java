@@ -8,13 +8,16 @@ public class Account {
     }
 
     public void deposit(int amount) {
-         if (amount < 0) {
-             throw new IllegalArgumentException("Amount must be > 0");
-         }
+        if (amount < 0) {
+            throw new IllegalArgumentException("Amount must be > 0");
+        }
         balance += amount;
     }
 
     public void withdraw(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Amount must be > 0");
+        }
         balance -= amount;
     }
 }
