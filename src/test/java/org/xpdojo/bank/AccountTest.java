@@ -143,4 +143,28 @@ public class AccountTest {
             assertThat(account2.balance()).isEqualTo(30);
         }
     }
+
+    @Test
+    public void transferBeyondBalanceBetweenTwoAccounts() {
+        Account account1 = new Account();
+        account1.deposit(10);
+        account1.deposit(20);
+        assertThat(account1.balance()).isEqualTo(30);
+
+        Account account2 = new Account();
+        account2.deposit(10);
+        account2.deposit(20);
+        assertThat(account2.balance()).isEqualTo(30);
+
+        boolean exception = false;
+        try {
+            account1.transfer(account2, 40);
+        } catch (Exception ex) {
+            exception = true;
+        } finally {
+            //check the balance is the same
+            assertThat(account1.balance()).isEqualTo(30);
+            assertThat(account2.balance()).isEqualTo(30);
+        }
+    }
 }
